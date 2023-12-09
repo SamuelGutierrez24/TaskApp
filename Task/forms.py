@@ -39,7 +39,8 @@ class taskCreationForm(ModelForm):
 
 
 class categoryCreationForm(ModelForm):
-    
+    name = forms.CharField(label="Nombre")
+    description = forms.CharField(label="Descripcion", widget=forms.Textarea())
     class Meta:
         model = models.Category
         fields = [

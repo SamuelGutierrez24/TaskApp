@@ -18,9 +18,11 @@ from django.contrib import admin
 from django.urls import path
 from Task.views import createTasks
 from Task.views import home
+from Task.views import createCategory
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home.home, name ='home'),
-    path('createTasks/', createTasks.createTasks, name = 'createTasks')
+    path('createTasks/', createTasks.createTasks, name = 'createTasks'),
+    path('createCategory/', createCategory.createCategory, name = 'createCategory'),
 ]
