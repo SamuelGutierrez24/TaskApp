@@ -47,4 +47,9 @@ class categoryCreationForm(ModelForm):
             'name',
             'description'
         ]
+
+
+class extraDataForm(forms.Form):
+    name = forms.CharField(label="Nombre")
+    description = forms.CharField(label="Descripcion", widget=forms.Textarea())
     
