@@ -7,7 +7,7 @@ class Migration(migrations.Migration):
     dependencies = [('Task', '0001_initial')]
     
     def insertData(app, schema_editor):
-        models.Category(idCat = 1, name = 'Ninguna', description='').save()
+        models.Category(name = 'Ninguna', description='').save()
     
     operations = [
         migrations.RunPython(insertData)

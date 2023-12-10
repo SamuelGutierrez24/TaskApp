@@ -18,23 +18,28 @@ class taskCreationForm(ModelForm):
     class nameModelChoiceField(forms.ModelChoiceField):
         def label_from_instance(self, obj: Model) -> str:
             return obj.name
-    
-    category = nameModelChoiceField( label = "Categoria", required = True,
-        queryset=models.Category.objects.order_by('name'),
+    taskName = forms.CharField(label = 'Nombre')    
+    category = nameModelChoiceField( label = "Categoria",required=True,
+        queryset=models.Category.objects.order_by('name').exclude(id=1),
         widget=forms.Select(attrs={'class': 'select2'}),    
-    )
-        
+    ) 
     color = forms.CharField(widget=forms.TextInput(attrs={'type':'color'}))
-    
-    taskState = forms.ChoiceField(label="Estado", choices=models.Task.state.choices)
+    taskState = forms.ChoiceField(label='Estado', choices=models.Task.state.choices)
+    periodicity = forms.ChoiceField(label='Periodicidad', choices=models.Task.period.choices)
+    dueDate = forms.DateField(label='Fecha de vencimiento', widget=forms.TextInput(attrs={'type':'date'}))
+    dueTime = forms.TimeField(label='Hora de vencimiento', widget=forms.TextInput(attrs={'type':'time'}))
     
     class Meta:
         
         model = models.Task
         fields = [
+            'taskName',
             'category',
             'color',
-            'taskState'
+            'taskState',
+            'periodicity',
+            'dueDate',
+            'dueTime'
         ]
 
 
@@ -50,6 +55,6 @@ class categoryCreationForm(ModelForm):
 
 
 class extraDataForm(forms.Form):
-    name = forms.CharField(label="Nombre")
-    description = forms.CharField(label="Descripcion", widget=forms.Textarea())
+    name = forms.CharField(label="Nombre", required=False)
+    description = forms.CharField(label="Descripcion", widget=forms.Textarea(), required=False)
     

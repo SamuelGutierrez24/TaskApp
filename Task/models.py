@@ -7,14 +7,16 @@ from colorfield.fields import ColorField
 from colorfield.fields import ColorWidget
 
 class Category(models.Model):
-    idCat = models.IntegerField(primary_key=True, auto_created=True)
     name = models.CharField(max_length=100, blank=False)
     description = models.TextField()
 
 
 class Task(models.Model):
-    idTask = models.IntegerField(primary_key=True, auto_created=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    def save(self,*args,**kwargs):
+        super(Task, self).save(*args,**kwargs)
+        return self
+    taskName = models.CharField(default='Tarea', max_length=100)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
     color = ColorField(default='#FFFFFF')
     
     class state(models.IntegerChoices):
@@ -25,9 +27,19 @@ class Task(models.Model):
     
     taskState = models.IntegerField(default=state.TODO, choices=state.choices)
     
+    class period(models.IntegerChoices):
+        NON_PERIODIC = 0, _('No periodico')
+        DAILY = 1, _('Diario')
+        WEEKLY = 2, _('Semanal')
+        MONTHLY = 3, _('Mensual')
+        ANNUALLY = 4, _('Anual')
+        
+    periodicity = models.IntegerField(default=period.NON_PERIODIC, choices=period.choices)
+    dueDate = models.DateField(default=datetime.today, blank=False)
+    dueTime = models.TimeField(default='00:00', blank=True)
+    
 
 class ExtraData(models.Model):
-    idExtra = models.IntegerField(primary_key=True, auto_created=True)
     nameExtra = models.CharField(max_length=100, blank=False)
     contentExtra = models.TextField()
     

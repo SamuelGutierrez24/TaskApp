@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from Task.forms import taskCreationForm
 from Task.forms import extraDataForm
+from Task.models import ExtraData
 
 def createTasks(request):   
     if request.method == 'GET':
@@ -11,5 +12,11 @@ def createTasks(request):
         })
     else:
         form = taskCreationForm(request.POST)
-        form.save()
+        a = form.save()
+        nameList = request.POST.getlist('name')
+        descList = request.POST.getlist('description')
+        
+        
+        #for n in range(len(nameList)):
+            
         return redirect('home')
