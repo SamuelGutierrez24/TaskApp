@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Task'
+    'Task',
+    'colorfield'
 ]
 
 MIDDLEWARE = [
@@ -117,7 +119,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = str(BASE_DIR).replace('\\', '/') + 'TaskApp/static/'
+STATIC_ROOT = str(BASE_DIR).replace('\\', '/') + '/TaskApp/static/'
+
+MEDIA_URL = '/TaskApp/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'TaskApp/media/')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 LOGIN_URL = '/signin'
 
