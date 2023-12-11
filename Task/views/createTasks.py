@@ -15,8 +15,10 @@ def createTasks(request):
         a = form.save()
         nameList = request.POST.getlist('name')
         descList = request.POST.getlist('description')
-        
-        
-        #for n in range(len(nameList)):
+        if(request.POST.get('isExtra')=='True'):
+            for n in range(len(nameList)):
+                if(nameList[n] != ''):
+                    ExtraData.objects.create(nameExtra=nameList[n], contentExtra=descList[n], task = a).save()
             
-        return redirect('home')
+            
+        return redirect('home') 

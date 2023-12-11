@@ -32,7 +32,7 @@
                     });
                 </script>
             </div>
-
+            <input  style="display:none;" name="isExtra" id="isExtra" value="False">
             <input class="standardButton" type="button" value="Añadir Datos Extra" id="add_more" firstPass="True">
             <script>
                 $('#add_more').click(function() {
@@ -41,6 +41,10 @@
                         $('#add_more').attr({'firstPass':'False'});
                         $('#add_more').attr({'value':'Añadir más'});
                         $('#d_0').attr({'style':'display:inerit;'});
+                        $('#id_name').attr({'required':''});
+                        console.log($('#isExtra'));
+                        $('#isExtra').attr({'value':'True'});
+                        console.log($('#isExtra'));
 
                     }
                     else{

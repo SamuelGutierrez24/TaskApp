@@ -42,5 +42,6 @@ class Task(models.Model):
 class ExtraData(models.Model):
     nameExtra = models.CharField(max_length=100, blank=False)
     contentExtra = models.TextField()
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, default=1)
     
     
