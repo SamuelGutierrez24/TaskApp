@@ -20,7 +20,7 @@ class taskCreationForm(ModelForm):
             return obj.name
     taskName = forms.CharField(label = 'Nombre')    
     category = nameModelChoiceField( label = "Categoria",required=True,
-        queryset=models.Category.objects.order_by('name').exclude(id=1),
+        queryset=models.Category.objects.order_by('name'),
         widget=forms.Select(attrs={'class': 'select2'}),    
     ) 
     color = forms.CharField(widget=forms.TextInput(attrs={'type':'color'}))

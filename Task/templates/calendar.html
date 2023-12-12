@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+{% load static %}
+{% load stripTime %}
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static "css/calendar.css" %}">
+        <script>
+
+            document.addEventListener('DOMContentLoaded', function() {
+                var calendarEl = document.getElementById('calendar');
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    
+                    initialView: 'dayGridMonth',
+                    headerToolbar: {
+                        left: "prev,next today",
+                        center: "title",
+                        right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
+                      },
+                    dayCellWillUnmount: function(info){
+                        info.el.innerHTML += "<button class='dayButton' data-date='" + info.date + "'>Click me</button>";
+                        info.el.style.padding = "20px 0 0 10px";
+                        },
+                    
+                    eventContent: function (arg) {
+    
+                        var event = arg.event;
+    
+                        var customHtml = '';
+    
+                        customHtml += "<span class='r10 font-xxs font-bold' style='overflow: hidden;'>" + event.title + "</span>";
+    
+                        customHtml += '<div class="hr-line-solid-no-margin"></div><span style="font-size: 10px">' + event.extendedProps.description + '</span></div>';
+    
+                                    
+    
+                        return { html: customHtml }
+                        },
+                    
+                    events: [
+                        {% for task in tasksList %}
+                                {   
+                                    title: "{{task.taskName}}",
+                                    color: '{{task.color}}',
+                                    description: '{{task.category.name}}',
+                                    allDay: false,
+                                    url: '/taskDetails/{{task.id}}',
+                                    {% if task.periodicity == 1 %}
+                                        startRecur: "{{task.dueDate | date:'Y-m-d'}}T{{task.dueTime|stripTime}}",
+                                        startTime: "{{task.dueTime|stripTime}}",
+                                        daysOfWeek: [0, 1, 2, 3, 4, 5, 6],
+                                    {% elif task.periodicity == 2 %}
+                                        startRecur: "{{task.dueDate | date:'Y-m-d' }}T{{task.dueTime|stripTime}}",
+                                        startTime: "{{task.dueTime|stripTime}}",
+                                        daysOfWeek: [{{task.dueDate.weekday}}+1],
+                                    {% elif task.periodicity == 3 %}
+                                        rrule:{
+                                            freq:"monthly",
+                                            dtstart:"{{task.dueDate}}",
+                                            bymonthday:[{{task.dueDate.day}}]
+                                        },
+                                        allDay: true,
+                                    {% elif task.periodicity == 4 %}
+                                        rrule:{
+                                            freq:"yearly",
+                                            dtstart:"{{task.dueDate}}",
+                                            //bymonthday:[{{task.dueDate.day}}]
+                                        },
+                                        allDay: true,
+                                    {% else %}
+                                        start: "{{task.dueDate | date:'Y-m-d'}}T{{task.dueTime|stripTime}}",
+                                        dtstart:"{{task.dueDate}}T{{task.dueTime|stripTime}}",
+                                    {% endif %}
+                                },
+                        {% endfor %}
+                    ],
+                    //This beautifull line of code is the whole reason this piece of [Hiperlink blocked] works 
+                    eventDisplay: 'block'
+                   
+    
+                });
+                
+                calendar.render();
+                calendar.setOption('locale', 'es')
+            });
+    
+            </script>       
+
+            <script src='https://cdn.jsdelivr.net/npm/rrule@2.6.4/dist/es5/rrule.min.js'></script>
+
+            <!-- fullcalendar bundle -->
+            <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+
+            <!-- the rrule-to-fullcalendar connector. must go AFTER the rrule lib -->
+            <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/rrule@6.1.10/index.global.min.js'></script>
+    </head>
+    <body>
+        <a href="/">Home</a>
+        <div id='calendar' class="card" style="padding:5%;background-color:white;border-radius: 15px;" ></div>
+        <script src="" async defer></script>
+        
+
+    </body>
+</html>
