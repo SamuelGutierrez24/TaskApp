@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.base_user import AbstractBaseUser
@@ -5,6 +6,8 @@ from django.contrib.auth.models import UserManager
 from datetime import datetime
 from colorfield.fields import ColorField
 from colorfield.fields import ColorWidget
+from django.contrib.auth.models import AbstractUser
+from django.db import models
 
 class Category(models.Model):
     name = models.CharField(max_length=100, blank=False)
@@ -45,3 +48,7 @@ class ExtraData(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE, default=1)
     
     
+class User(AbstractUser):
+    
+    def __str__(self):
+        return self.username
