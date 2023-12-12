@@ -19,10 +19,12 @@ from django.urls import path
 from Task.views import createTasks
 from Task.views import home
 from Task.views import createCategory
+from Task.views import calendar
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home.home, name ='home'),
     path('createTasks/', createTasks.createTasks, name = 'createTasks'),
     path('createCategory/', createCategory.createCategory, name = 'createCategory'),
+    path('calendar/', calendar.calendar, name = 'calendar')
 ]
