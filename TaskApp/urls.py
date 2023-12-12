@@ -22,12 +22,14 @@ from Task.views import createCategory
 import Task.views.signUp as signUp
 import Task.views.login as login
 import Task.views.home as home
+import Task.views.signOut as logOut
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', signUp.signUp, name='signup'),
     path('signin/', login.signin, name='signin'),
+    path('logout/', logOut.signout, name='logout'),
     path('', home.home, name ='home'),
     path('createTasks/', createTasks.createTasks, name = 'createTasks'),
     path('createCategory/', createCategory.createCategory, name = 'createCategory'),

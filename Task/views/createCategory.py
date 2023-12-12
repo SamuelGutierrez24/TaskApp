@@ -9,5 +9,7 @@ def createCategory(request):
         })
     else:
         form = categoryCreationForm(request.POST)
-        form.save()
+        category = form.save(commit=False)
+        category.user = request.user  # Asigna el usuario actual a la tarea
+        category.save()
         return redirect('home')
