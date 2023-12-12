@@ -50,6 +50,7 @@
                                     color: '{{task.color}}',
                                     description: '{{task.category.name}}',
                                     allDay: false,
+                                    url: '/taskDetails/{{task.id}}',
                                     {% if task.periodicity == 1 %}
                                         startRecur: "{{task.dueDate | date:'Y-m-d'}}T{{task.dueTime|stripTime}}",
                                         startTime: "{{task.dueTime|stripTime}}",

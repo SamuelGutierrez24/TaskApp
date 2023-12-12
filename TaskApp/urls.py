@@ -20,11 +20,13 @@ from Task.views import createTasks
 from Task.views import home
 from Task.views import createCategory
 from Task.views import calendar
+from Task.views import taskDetails
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home.home, name ='home'),
     path('createTasks/', createTasks.createTasks, name = 'createTasks'),
     path('createCategory/', createCategory.createCategory, name = 'createCategory'),
-    path('calendar/', calendar.calendar, name = 'calendar')
+    path('calendar/', calendar.calendar, name = 'calendar'),
+    path('taskDetails/<int:tID>/', taskDetails.taskDetails, name = 'taskDetails')
 ]
