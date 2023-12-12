@@ -9,4 +9,5 @@ def signin(request):
         return render(request, 'login.html')
     else:
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
+        login(request,user)
         return redirect('home')

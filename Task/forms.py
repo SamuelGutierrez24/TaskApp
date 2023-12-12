@@ -28,7 +28,7 @@ class taskCreationForm(ModelForm):
     periodicity = forms.ChoiceField(label='Periodicidad', choices=models.Task.period.choices)
     dueDate = forms.DateField(label='Fecha de vencimiento', widget=forms.TextInput(attrs={'type':'date'}))
     dueTime = forms.TimeField(label='Hora de vencimiento', widget=forms.TextInput(attrs={'type':'time'}))
-    
+
     class Meta:
         
         model = models.Task
@@ -39,8 +39,12 @@ class taskCreationForm(ModelForm):
             'taskState',
             'periodicity',
             'dueDate',
-            'dueTime'
+            'dueTime',
+            'user'
         ]
+        widgets = {
+            'user': forms.HiddenInput(),  # Este campo se llenará automáticamente con el usuario logueado
+        }
 
 
 class categoryCreationForm(ModelForm):
@@ -50,8 +54,12 @@ class categoryCreationForm(ModelForm):
         model = models.Category
         fields = [
             'name',
-            'description'
+            'description',
+            'user'
         ]
+        widgets = {
+            'user': forms.HiddenInput(),  # Este campo se llenará automáticamente con el usuario logueado
+        }
 
 
 class extraDataForm(forms.Form):
