@@ -4,6 +4,7 @@ from django.forms.widgets import NumberInput
 from django.forms import Form
 from django import forms
 import Task.models as models
+from django.db import models as djangoModels
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.db.models import Q
@@ -11,13 +12,18 @@ from django.db.models import Value
 from django.db.models import CharField
 from django.db.models import F
 from django.db.models.functions import Concat
+from django.utils.translation import gettext_lazy as _
 
+class nameModelChoiceField(forms.ModelChoiceField):
+        def label_from_instance(self, obj: Model) -> str:
+            return obj.name
+        
+        
+        
 
 class taskCreationForm(ModelForm):
     
-    class nameModelChoiceField(forms.ModelChoiceField):
-        def label_from_instance(self, obj: Model) -> str:
-            return obj.name
+    
     taskName = forms.CharField(label = 'Nombre')    
     category = nameModelChoiceField( label = "Categoria",required=True,
         queryset=models.Category.objects.order_by('name'),
@@ -82,3 +88,19 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User  # Usa el modelo de usuario importado
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+
+class basicFilters(forms.Form):
+    category = forms.ModelChoiceField(label = "Categoria",
+        queryset=models.Category.objects.all(),to_field_name='name',
+        widget=forms.Select(attrs={'class': 'select2', 'onchange':'catSearch()'}),    
+    ) 
+    
+    class state(djangoModels.IntegerChoices):
+        EMPTY = 5, _('------')
+        TODO = 0, _('Por hacer')
+        IN_PROG = 1, _('En proceso')
+        CANCELED = 2, _('Cancelada')
+        FINISHED = 3, _('Finalizada')
+    
+    taskState = forms.ChoiceField(label='Estado', choices=state.choices, 
+                                  widget=forms.Select(attrs={'class': 'select2', 'onchange':'stateSearch()'}))

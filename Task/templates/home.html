@@ -13,8 +13,8 @@
     {% block title %}
         <title>Home</title>
     {% endblock title %}
-
     {% block script %}
+        <script src="{% static "js/taskFilters.js" %}"></script>
     {% endblock %}
     
 </head>
@@ -40,7 +40,9 @@
 
             <div class="tasks-table">
                 <h2>Tareas Pendientes</h2>
-                <table>
+                <p>Titulo: <input type="text" id="idS" onkeyup="nameSearch()"></p>
+                {{filter.as_p}}
+                <table id="tTable">
                     <thead>
                         <tr>
                             <th>Título</th>
@@ -57,7 +59,7 @@
                                 <td>{{ task.taskName }}</td>
                                 <td>{{ task.description }}</td>
                                 <td>{{ task.category }}</td>
-                                <td>{{ task.state }}</td>
+                                <td>{{ task.taskState }}</td>
                                 <td>{{ task.dueDate }}</td>
                             </tr>
                         {% endfor %}
