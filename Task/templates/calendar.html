@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+{% extends 'home.html' %}
 {% load static %}
 {% load stripTime %}
 
@@ -10,7 +10,14 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{% static "css/calendar.css" %}">
+        {% block style %}
+            <link rel="stylesheet" href="{% static "css/calendar.css" %}">
+        {% endblock %}
+
+        {% block title %}
+            <title>Calendario</title>
+        {% endblock %}
+        {% block script %}
         <script>
 
             document.addEventListener('DOMContentLoaded', function() {
@@ -99,11 +106,13 @@
 
             <!-- the rrule-to-fullcalendar connector. must go AFTER the rrule lib -->
             <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/rrule@6.1.10/index.global.min.js'></script>
+        {% endblock %}
     </head>
     <body>
-        <a href="/">Home</a>
-        <div id='calendar' class="card" style="padding:5%;background-color:white;border-radius: 15px;" ></div>
-        <script src="" async defer></script>
+        {%  block content %}
+            <div id='calendar' class="card" style="padding:5%;background-color:white;border-radius: 15px;" ></div>
+            <script src="" async defer></script>
+        {% endblock %}
         
 
     </body>
