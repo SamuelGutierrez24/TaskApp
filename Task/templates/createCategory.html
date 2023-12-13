@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% extends 'home.html' %}
 {% load static %}
 
 <html lang="en">
@@ -6,23 +7,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/createCategory.css' %}">
-    <title>Agregar Categoría</title>
+    {% block style %}
+        <link rel="stylesheet" href="{% static 'css/createCategory.css' %}">
+    {% endblock %}
+    {% block title %}
+        <title>Agregar Categoría</title>
+    {% endblock %}
 </head>
 <body>
 
-<div class="container">
-    <nav class="sidebar">
-        <ul>
-            <li><a href="/" class="active">Inicio</a></li>
-            <li><a href="/createTasks" class="add-task">Agregar Tarea</a></li>
-            <li><a href="#" class="add-category">Agregar Categoría</a></li>
-            <li><a href="#" class="calendar">Ir al Calendario</a></li>
-            <li><a href="/logout" class="logout">Log Out</a></li>
-        </ul>
-    </nav>
-
-    <div class="content">
+    {% block content %}
         <form method="POST">
             {% csrf_token %}
 
@@ -30,8 +24,7 @@
 
             <button>Guardar</button>
         </form>
-    </div>
-</div>
+    {% endblock %}
 
 </body>
 </html>

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+{% extends "home.html" %}
 {% load static %}
+
 
 <html lang="en">
 <head>
@@ -8,66 +10,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
     <script src="{% static 'js/extraData.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/createTasks.css' %}">
-    <title>Agregar Tarea</title>
+    {% block style %}
+        <link rel="stylesheet" href="{% static 'css/createTasks.css' %}">
+    {% endblock %}
+    {% block title %}
+        <title>Agregar Tarea</title>
+    {% endblock %}
 </head>
 <body>
 
-<div class="container">
-    <nav class="sidebar">
-        <ul>
-        <li><a href="/" class="active">Inicio</a></li>
-        <li><a href="#" class="add-task">Agregar Tarea</a></li>
-        <li><a href="/createCategory/" class="add-category">Agregar Categoría</a></li>
-        <li><a href="#" class="calendar">Ir al Calendario</a></li>
-        <li><a href="/logout" class="logout">Log Out</a></li>
-    </nav>
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
 
-    <div class="content">
-        <form method="POST">
-            {% csrf_token %}
+        {{ taskForm }}
 
-            {{ taskForm }}
+        <br>
 
-            <br>
-
-            <div style="display:none;" class="extra" id="d_0">
-                {{ extraData }}
-                <input type="button" id="id_n_0" name="n_0" value="Eliminar" class="deleter standardButton" data-div="d_0" style="display: none"></input>
-                <script>
-                    $('.deleter').click(function(){
-                        var div = $(this).attr('data-div');
-                        if(!(div === 'd_0')){
-                            $('#'+div+":last").remove();
-                            $(this).remove();
-                        }
-                    });
-                </script>
-            </div>
-            <input style="display:none;" name="isExtra" id="isExtra" value="False">
-            <input class="standardButton" type="button" value="Añadir Datos Extra" id="add_more" firstPass="True">
+        <div style="display:none;" class="extra" id="d_0">
+            {{ extraData }}
+            <input type="button" id="id_n_0" name="n_0" value="Eliminar" class="deleter standardButton" data-div="d_0" style="display: none"></input>
             <script>
-                $('#add_more').click(function() {
-                    if($('#add_more').attr('firstPass')==='True'){
-
-                        $('#add_more').attr({'firstPass':'False'});
-                        $('#add_more').attr({'value':'Añadir más'});
-                        $('#d_0').attr({'style':'display:inherit;'});
-                        $('#id_name').attr({'required':''});
-                        console.log($('#isExtra'));
-                        $('#isExtra').attr({'value':'True'});
-                        console.log($('#isExtra'));
-
-                    }
-                    else{
-                        cloneMore('div.extra:last', 'service');
+                $('.deleter').click(function(){
+                    var div = $(this).attr('data-div');
+                    if(!(div === 'd_0')){
+                        $('#'+div+":last").remove();
+                        $(this).remove();
                     }
                 });
             </script>
-            <button>Guardar</button>
-        </form>
-    </div>
-</div>
+        </div>
+        <input style="display:none;" name="isExtra" id="isExtra" value="False">
+        <input class="standardButton" type="button" value="Añadir Datos Extra" id="add_more" firstPass="True">
+        <script>
+            $('#add_more').click(function() {
+                if($('#add_more').attr('firstPass')==='True'){
+
+                    $('#add_more').attr({'firstPass':'False'});
+                    $('#add_more').attr({'value':'Añadir más'});
+                    $('#d_0').attr({'style':'display:inherit;'});
+                    $('#id_name').attr({'required':''});
+                    console.log($('#isExtra'));
+                    $('#isExtra').attr({'value':'True'});
+                    console.log($('#isExtra'));
+
+                }
+                else{
+                    cloneMore('div.extra:last', 'service');
+                }
+            });
+        </script>
+        <button>Guardar</button>
+    </form>
+{% endblock %}
 
 </body>
 </html>
