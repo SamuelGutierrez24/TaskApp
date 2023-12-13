@@ -6,54 +6,66 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
-    <title>Home</title>
+    {% block style %}
+        <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    {% endblock style %}
+
+    {% block title %}
+        <title>Home</title>
+    {% endblock title %}
+
+    {% block script %}
+    {% endblock %}
+    
 </head>
 <body>
 
 <div class="container">
     <nav class="sidebar">
         <ul>
-            <li><a href="#" class="active">Inicio</a></li>
-            <li><a href="createTasks/" class="add-task">Agregar Tarea</a></li>
-            <li><a href="createCategory/" class="add-category">Agregar Categoría</a></li>
-            <li><a href="#" class="calendar">Ir al Calendario</a></li>
+            <li><a href="/" class="active">Inicio</a></li>
+            <li><a href="/createTasks/" class="add-task">Agregar Tarea</a></li>
+            <li><a href="/createCategory/" class="add-category">Agregar Categoría</a></li>
+            <li><a href="/calendar/" class="calendar">Ir al Calendario</a></li>
             <li><a href="/logout" class="logout">Log Out</a></li>
         </ul>
     </nav>
 
     <div class="content">
-        <div class="header">
-            <h1>Bienvenido, {{ user.username }} </h1>
-        </div>
+        {% block content %}
+        
+            <div class="header">
+                <h1>Bienvenido, {{ user.username }} </h1>
+            </div>
 
-        <div class="tasks-table">
-            <h2>Tareas Pendientes</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Título</th>
-                        <th>Descripción</th>
-                        <th>Categoría</th>
-                        <th>Estado</th>
-                        <th>Fecha</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Aquí puedes iterar sobre las tareas y llenar la tabla dinámicamente -->
-                    {% for task in tasks %}
+            <div class="tasks-table">
+                <h2>Tareas Pendientes</h2>
+                <table>
+                    <thead>
                         <tr>
-                            <td>{{ task.taskName }}</td>
-                            <td>{{ task.description }}</td>
-                            <td>{{ task.category }}</td>
-                            <td>{{ task.state }}</td>
-                            <td>{{ task.dueDate }}</td>
+                            <th>Título</th>
+                            <th>Descripción</th>
+                            <th>Categoría</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
                         </tr>
-                    {% endfor %}
-                    
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        <!-- Aquí puedes iterar sobre las tareas y llenar la tabla dinámicamente -->
+                        {% for task in tasks %}
+                            <tr>
+                                <td>{{ task.taskName }}</td>
+                                <td>{{ task.description }}</td>
+                                <td>{{ task.category }}</td>
+                                <td>{{ task.state }}</td>
+                                <td>{{ task.dueDate }}</td>
+                            </tr>
+                        {% endfor %}
+                        
+                    </tbody>
+                </table>
+            </div>
+        {% endblock content %}
     </div>
 </div>
 
