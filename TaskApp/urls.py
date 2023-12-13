@@ -21,6 +21,8 @@ from Task.views import home
 from Task.views import createCategory
 from Task.views import calendar
 from Task.views import taskDetails
+from Task.views import editTask
+from Task.views import deleteTask
 import Task.views.signUp as signUp
 import Task.views.login as login
 import Task.views.home as home
@@ -36,5 +38,9 @@ urlpatterns = [
     path('createTasks/', createTasks.createTasks, name = 'createTasks'),
     path('createCategory/', createCategory.createCategory, name = 'createCategory'),
     path('calendar/', calendar.calendar, name = 'calendar'),
-    path('taskDetails/<int:tID>/', taskDetails.taskDetails, name = 'taskDetails')
+    path('taskDetails/<int:tID>/', taskDetails.taskDetails, name = 'taskDetails'),
+    path('editTask/<int:task_id>/', editTask.editTask, name='editTask'),
+    path('deleteTask/<int:task_id>/', deleteTask.deleteTask, name='delete_task'),
+
+
 ]

@@ -1,0 +1,11 @@
+<h1>Hellos world</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Guardar cambios</button>
+</form>
+<form method="POST" action="{% url 'delete_task' task.id %}" style="margin-top: 10px;">
+    {% csrf_token %}
+    <button type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar esta tarea?')">Eliminar tarea</button>
+</form>
