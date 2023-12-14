@@ -32,7 +32,7 @@
         </ul>
     </nav>
 
-    <div class="content">
+    <div class="content" method = "POST">
         {% block content %}
         
             <div class="header">
@@ -64,6 +64,12 @@
                                 <td>{{ task.category }}</td>
                                 <td>{{ task.taskState | descState }}</td>
                                 <td>{{ task.dueDate }}</td>
+                                <td>
+                                    <a href="{% url 'editTask' task.id %}">
+                                        <button type="button">
+                                            editar
+                                        </button>
+                                </td>
                             </tr>
                         {% endfor %}
                         
