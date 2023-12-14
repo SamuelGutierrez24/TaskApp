@@ -41,8 +41,9 @@ body {
 .content {
     flex: 1;
     padding-left: 20px;
-    height: 650px;
+    height: 680px;
     overflow-y: auto;
+    overflow-x: visible;
 }
 
 .header {
