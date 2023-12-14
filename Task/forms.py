@@ -11,6 +11,9 @@ from django.db.models import Value
 from django.db.models import CharField
 from django.db.models import F
 from django.db.models.functions import Concat
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User  
 
 
 class taskCreationForm(ModelForm):
@@ -65,12 +68,11 @@ class categoryCreationForm(ModelForm):
 class extraDataForm(forms.Form):
     name = forms.CharField(label="Nombre", required=False)
     description = forms.CharField(label="Descripcion", widget=forms.Textarea(), required=False)
-    from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User  # Importa el modelo de usuario de Django
+    archive = forms.FileField(label= 'Archivo a adjuntar',required=False)
+
 
 class CustomUserCreationForm(UserCreationForm):
-    # Puedes agregar campos adicionales aquí según tus necesidades
+
     first_name = forms.CharField(max_length=30, required=True)
     last_name = forms.CharField(max_length=30, required=True)
     email = forms.EmailField(max_length=254, required=True, help_text='Requerido. Ingrese una dirección de correo electrónico válida.')
