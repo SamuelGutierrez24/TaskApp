@@ -8,7 +8,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block style %}
-        <link rel="stylesheet" href="{% static 'css/home.css' %}">
+        {% if opposite == 'Dark mode' %}
+            <link rel="stylesheet" href="{% static 'css/home.css' %}">
+        {% else %}
+            <link rel="stylesheet" href="{% static 'css/darkHome.css' %}">
+        {% endif %}
     {% endblock style %}
 
     {% block title %}
@@ -29,6 +33,7 @@
             <li><a href="/createCategory/" class="add-category">Agregar Categoría</a></li>
             <li><a href="/calendar/" class="calendar">Ir al Calendario</a></li>
             <li><a href="/logout" class="logout">Log Out</a></li>
+            <li><form method="POST">{% csrf_token %}<button>{{opposite}}</button></form></li>
         </ul>
     </nav>
 
@@ -65,7 +70,7 @@
                                 <td>{{ task.taskState | descState }}</td>
                                 <td>{{ task.dueDate }}</td>
                                 <td>
-                                    <a href="{% url 'editTask' task.id %}">
+                                    <a href="{% url 'taskDetails' task.id %}">
                                         <button type="button">
                                             editar
                                         </button>
