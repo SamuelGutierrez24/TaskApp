@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load descState %}
 
 <html lang="en">
 <head>
@@ -13,8 +14,8 @@
     {% block title %}
         <title>Home</title>
     {% endblock title %}
-
     {% block script %}
+        <script src="{% static "js/taskFilters.js" %}"></script>
     {% endblock %}
     
 </head>
@@ -40,7 +41,11 @@
 
             <div class="tasks-table">
                 <h2>Tareas Pendientes</h2>
-                <table>
+                <p>Titulo: <input type="text" id="idS" onkeyup="nameSearch()"></p>
+                <p>Descripcion: <input type="text" id="idSd" onkeyup="descSearch()"></p>
+                {{filter.as_p}}
+                <input onclick = 'dates()' type='button' value='Limitar'>
+                <table id="tTable">
                     <thead>
                         <tr>
                             <th>Título</th>
@@ -55,9 +60,9 @@
                         {% for task in tasks %}
                             <tr>
                                 <td>{{ task.taskName }}</td>
-                                <td>{{ task.description }}</td>
+                                <td>{{ task.taskDescription }}</td>
                                 <td>{{ task.category }}</td>
-                                <td>{{ task.state }}</td>
+                                <td>{{ task.taskState | descState }}</td>
                                 <td>{{ task.dueDate }}</td>
                                 <td>
                                     <a href="{% url 'editTask' task.id %}">

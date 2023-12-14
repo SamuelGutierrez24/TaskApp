@@ -19,6 +19,7 @@ def editTask(request, task_id):
         form = taskCreationForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
+            return redirect('home')
     else:
         form = taskCreationForm(instance=task)
 
