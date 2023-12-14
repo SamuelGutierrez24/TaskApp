@@ -13,7 +13,8 @@ def createTasks(request):
         })
     else:
         form = taskCreationForm(request.POST)
-        print(form.errors)
+        print('aaaaaaaaaaaa', form.errors)
+        print('pipipipipipi', request.POST.get('taskDescription'))
         task = form.save(commit=False)
         task.user = request.user  # Asigna el usuario actual a la tarea
         task.save()

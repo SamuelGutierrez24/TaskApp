@@ -30,7 +30,7 @@ class Task(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,default=1)
     taskName = models.CharField(default='Tarea', max_length=100)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
-    description = models.TextField(default="")
+    taskDescription = models.TextField(default="")
     color = ColorField(default='#FFFFFF')
     
     class state(models.IntegerChoices):
