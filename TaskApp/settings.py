@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
-import os
+from celery import Celery
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -132,3 +132,24 @@ LOGIN_URL = '/signin'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'Task.User'
+# settings.py
+
+# set the default Django settings module for the 'celery' program.
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TaskApp.settings')
+
+# create a Celery instance and configure it using the settings from Django
+celery_app = Celery('TaskApp')
+
+# Load task modules from all registered Django app configs.
+celery_app.config_from_object('django.conf:settings', namespace='CELERY')
+
+# Auto-discover tasks in all installed apps
+celery_app.autodiscover_tasks()
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'filantropiaicesi@gmail.com'
+EMAIL_HOST_PASSWORD = 'kaxz umrt odcn hmsf'
+EMAIL_USE_TLS = True
+
