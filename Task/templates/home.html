@@ -33,7 +33,7 @@
             <li><a href="/createCategory/" class="add-category">Agregar Categoría</a></li>
             <li><a href="/calendar/" class="calendar">Ir al Calendario</a></li>
             <li><a href="/logout" class="logout">Log Out</a></li>
-            <li><form method="POST">{% csrf_token %}<button>{{opposite}}</button></form></li>
+            <li><form method="POST">{% csrf_token %}<button id="opposite" name="opposite">{{opposite}}</button></form></li>
         </ul>
     </nav>
 

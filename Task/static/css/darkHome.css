@@ -78,10 +78,7 @@ th, td {
 th {
     background-color: #3e3d41;
 }
-button{
-    background-color: #333;
-    color: white;
-}
+
 
 h1{
     color: white;
@@ -103,4 +100,6 @@ textarea{
     color: white;
     height: 75px;
 }
+
+
 

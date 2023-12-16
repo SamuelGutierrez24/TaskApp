@@ -8,7 +8,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block style %}
-        <link rel="stylesheet" href="{% static 'css/createCategory.css' %}">
+        {% if opposite == 'Dark mode' %}
+            <link rel="stylesheet" href="{% static 'css/createCategory.css' %}">
+        {% else %}
+            <link rel="stylesheet" href="{% static 'css/darkCreateCategory.css' %}">
+        {% endif %}
     {% endblock %}
     {% block title %}
         <title>Agregar Categoría</title>
@@ -22,7 +26,7 @@
 
             {{ taskForm }}
 
-            <button>Guardar</button>
+            <button id="button">Guardar</button>
         </form>
     {% endblock %}
 
