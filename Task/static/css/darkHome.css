@@ -3,7 +3,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: 'Arial', sans-serif;
-    background-color: #f0f0f0;
+    background-color: #403f45;
 }
 
 .container {
@@ -11,6 +11,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    color:white;
 }
 
 .sidebar {
@@ -51,14 +52,15 @@ body {
 }
 
 .tasks-table {
-    background-color: #fff;
+    background-color: #50505a;
+    color: rgb(170, 170, 170);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .tasks-table h2 {
-    color: #333;
+    color: rgb(255, 255, 255);
     margin-bottom: 15px;
 }
 
@@ -68,23 +70,36 @@ table {
 }
 
 th, td {
-    border: 1px solid #ddd;
+    border: 1px solid #000000;
     padding: 10px;
     text-align: left;
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #3e3d41;
 }
-button{
-    background-color: #333;
+
+
+h1{
     color: white;
-    border-radius: 4px;
 }
-button:hover{
+
+input{
     background-color: #555;
+    color: white;
+    border-color: #000000;
+}
+
+select{
+    background-color: #555;
+    color: white;
 }
 
 textarea{
+    background-color: #555;
+    color: white;
     height: 75px;
 }
+
+
+

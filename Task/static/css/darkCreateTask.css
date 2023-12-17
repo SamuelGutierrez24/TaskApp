@@ -1,4 +1,4 @@
-@import url('home.css');
+@import url('darkHome.css');
 
 
 input[type="text"],
@@ -15,9 +15,8 @@ input[type="time"] {
     font-size: 16px;
 }
 
-textarea{
-    height: 75px;
-}
+
+
 
 #button {
     background-color: #4caf50;

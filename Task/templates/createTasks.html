@@ -9,12 +9,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block script %}
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-    <script src="{% static 'js/extraData.js' %}"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+        <script src="{% static 'js/extraData.js' %}"></script>
     {% endblock %}
-    
     {% block style %}
-        <link rel="stylesheet" href="{% static 'css/createTasks.css' %}">
+        {% if opposite == 'Dark mode' %}
+            <link rel="stylesheet" href="{% static 'css/createTasks.css' %}">
+        {% else %}
+            <link rel="stylesheet" href="{% static 'css/darkCreateTask.css' %}">
+        {% endif %}
     {% endblock %}
     {% block title %}
         <title>Agregar Tarea</title>
@@ -25,6 +28,8 @@
 {% block content %}
     <form method="POST">
         {% csrf_token %}
+
+        <h1>Creación de Tarea</h1>
 
         {{ taskForm }}
 
@@ -63,7 +68,7 @@
                 }
             });
         </script>
-        <button>Guardar</button>
+        <button id="button">Guardar</button>
     </form>
 {% endblock %}
 

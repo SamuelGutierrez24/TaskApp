@@ -4,10 +4,27 @@ from Task.forms import categoryCreationForm
 
 def createCategory(request):   
     if request.method == 'GET':
+        opposite = request.session.get('opposite', 'Dark mode')
         return render(request, './createCategory.html', {
-            'taskForm': categoryCreationForm
+            'taskForm': categoryCreationForm,
+            'opposite': opposite
         })
     else:
+        
+        if(request.POST.get('opposite') is not None):
+            newMode = request.session.get('opposite', 'Dark mode')
+            if(newMode == 'Dark mode'):
+                request.session['opposite'] = 'Light mode'
+            else:
+                request.session['opposite'] = 'Dark mode'
+                
+            opposite = request.session.get('opposite', 'Dark mode')
+            
+            return render(request, './createCategory.html', {
+            'taskForm': categoryCreationForm,
+            'opposite': opposite
+            })
+        
         form = categoryCreationForm(request.POST)
         category = form.save(commit=False)
         category.user = request.user  # Asigna el usuario actual a la tarea

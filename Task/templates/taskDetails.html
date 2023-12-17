@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+{% extends 'home.html' %}
+{% load static %}
+{% load nToPeriodicity %}
+{% load dateTag %}
+{% load formatTitle %}
+
+
 <html>
     <head>
         <meta charset="utf-8">
@@ -6,12 +13,54 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        
+        {% block style %}
+            {% if opposite == 'Dark mode' %}
+                <link rel="stylesheet" href="{% static 'css/taskDetails.css' %}">
+            {% else %}
+                <link rel="stylesheet" href="{% static 'css/darkTaskDetails.css' %}">
+            {% endif %}
+        {% endblock %}
     </head>
-    <body style='background-color:{{task.color}};'>
-        <script src="" async defer></script>
-        {{task.id}}<br>
-        {{task.taskName}}<br>
-        {{task.category.name}}
+    <body>
+        {% block content %}
+        <h2> Informacion de la tarea</h2>
+            <div style="background-color:{{task.color}};" id="titleCard">
+                <table>
+                    <th>
+                        <div id="title">
+                            <h1>{{task.taskName | formatTitle}}</h1>
+                        </div>
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th><a href="/editTask/{{task.id}}/"><button id="button">Editar</button></a></th>
+                </table>
+            </div>
+            <h3>Nombre completo</h3>
+                {{ task.taskName}}
+            <h3>Descripcion</h3>
+                {{ task.description }}
+            <h3>Categoria</h3>
+                {{task.category.name}}
+            
+            <h3>{{ task.periodicity | dateTag }}</h3>
+                {{ task.dueDate }}
+
+            <h3>Periodicidad</h4>
+                {{ task.periodicity | nToPeriodicity }}
+            {% if isExtra %}
+                <h3>Datos Extra</h3>
+                    {% for n in extra %}
+                        <h4>Nombre</h4>
+                            {{n.nameExtra}}
+                        <h4>Descripcion</h4>
+                            {{n.contentExtra}}
+                    {% endfor %}
+            {% endif %}
+            
+            
+        {% endblock %}
     </body>
 </html>

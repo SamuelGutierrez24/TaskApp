@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load descState %}
 
 <html lang="en">
 <head>
@@ -7,14 +8,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block style %}
-        <link rel="stylesheet" href="{% static 'css/home.css' %}">
+        {% if opposite == 'Dark mode' %}
+            <link rel="stylesheet" href="{% static 'css/home.css' %}">
+        {% else %}
+            <link rel="stylesheet" href="{% static 'css/darkHome.css' %}">
+        {% endif %}
     {% endblock style %}
 
     {% block title %}
         <title>Home</title>
     {% endblock title %}
-
     {% block script %}
+        <script src="{% static "js/taskFilters.js" %}"></script>
     {% endblock %}
     
 </head>
@@ -28,6 +33,7 @@
             <li><a href="/createCategory/" class="add-category">Agregar Categoría</a></li>
             <li><a href="/calendar/" class="calendar">Ir al Calendario</a></li>
             <li><a href="/logout" class="logout">Log Out</a></li>
+            <li><form method="POST">{% csrf_token %}<button id="opposite" name="opposite">{{opposite}}</button></form></li>
         </ul>
     </nav>
 
@@ -40,7 +46,11 @@
 
             <div class="tasks-table">
                 <h2>Tareas Pendientes</h2>
-                <table>
+                <p>Titulo: <input type="text" id="idS" onkeyup="nameSearch()"></p>
+                <p>Descripcion: <input type="text" id="idSd" onkeyup="descSearch()"></p>
+                {{filter.as_p}}
+                <input onclick = 'dates()' type='button' value='Limitar'>
+                <table id="tTable">
                     <thead>
                         <tr>
                             <th>Título</th>
@@ -55,12 +65,12 @@
                         {% for task in tasks %}
                             <tr>
                                 <td>{{ task.taskName }}</td>
-                                <td>{{ task.description }}</td>
+                                <td>{{ task.taskDescription }}</td>
                                 <td>{{ task.category }}</td>
-                                <td>{{ task.state }}</td>
+                                <td>{{ task.taskState | descState }}</td>
                                 <td>{{ task.dueDate }}</td>
                                 <td>
-                                    <a href="{% url 'editTask' task.id %}">
+                                    <a href="{% url 'taskDetails' task.id %}">
                                         <button type="button">
                                             editar
                                         </button>

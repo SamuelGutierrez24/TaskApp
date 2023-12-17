@@ -2,6 +2,7 @@
 {% extends 'home.html' %}
 {% load static %}
 {% load stripTime %}
+{% load formatTitle %}
 
 <html>
     <head>
@@ -11,7 +12,12 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {% block style %}
-            <link rel="stylesheet" href="{% static "css/calendar.css" %}">
+            {% if opposite == 'Dark mode' %}
+                <link rel="stylesheet" href="{% static "css/calendar.css" %}">
+            {% else %}
+                <link rel="stylesheet" href="{% static "css/darkCalendar.css" %}">
+            {% endif %}
+            
         {% endblock %}
 
         {% block title %}
@@ -53,7 +59,7 @@
                     events: [
                         {% for task in tasksList %}
                                 {   
-                                    title: "{{task.taskName}}",
+                                    title: "{{task.taskName | formatTitle}}",
                                     color: '{{task.color}}',
                                     description: '{{task.category.name}}',
                                     allDay: false,
@@ -110,7 +116,7 @@
     </head>
     <body>
         {%  block content %}
-            <div id='calendar' class="card" style="padding:5%;background-color:white;border-radius: 15px;" ></div>
+            <div id='calendar' class="card" style="padding:5%;border-radius: 15px;" ></div>
             <script src="" async defer></script>
         {% endblock %}
         
