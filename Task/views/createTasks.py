@@ -40,7 +40,7 @@ def createTasks(request):
             task.save()
             nameList = request.POST.getlist('name')
             descList = request.POST.getlist('description')
-        archive = request.POST.getlist('archive')
+            archive = request.POST.getlist('archive')
             if(request.POST.get('isExtra')=='True'):
                 for n in range(len(nameList)):
                     if(nameList[n] != ''):

@@ -12,15 +12,17 @@ from django.db.models import F
 from django.db.models.functions import Concat
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User  
+from django.contrib.auth.models import User 
+from django.utils.translation import gettext_lazy as _
 
 
-class taskCreationForm(ModelForm):
+
+
     
-    class nameModelChoiceField(forms.ModelChoiceField):
-        def label_from_instance(self, obj: Model) -> str:
-            return obj.name
-        
+class nameModelChoiceField(forms.ModelChoiceField):
+    def label_from_instance(self, obj: Model) -> str:
+        return obj.name
+    
         
         
 
