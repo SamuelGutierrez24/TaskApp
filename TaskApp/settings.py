@@ -123,7 +123,7 @@ STATIC_URL = str(BASE_DIR).replace('\\', '/') + 'TaskApp/static/'
 STATIC_ROOT = str(BASE_DIR).replace('\\', '/') + '/TaskApp/static/'
 
 MEDIA_URL = '/TaskApp/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'TaskApp/media/')
+MEDIA_ROOT = BASE_DIR / 'media'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 LOGIN_URL = '/signin'
 
