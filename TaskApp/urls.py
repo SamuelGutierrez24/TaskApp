@@ -23,6 +23,7 @@ from Task.views import calendar
 from Task.views import taskDetails
 from Task.views import editTask
 from Task.views import deleteTask
+from Task.views import reminder
 import Task.views.signUp as signUp
 import Task.views.login as login
 import Task.views.home as home
@@ -41,6 +42,7 @@ urlpatterns = [
     path('taskDetails/<int:tID>/', taskDetails.taskDetails, name = 'taskDetails'),
     path('editTask/<int:task_id>/', editTask.editTask, name='editTask'),
     path('deleteTask/<int:task_id>/', deleteTask.deleteTask, name='delete_task'),
+    path('emails/',reminder.email,name='emails' ),
 
 
 ]

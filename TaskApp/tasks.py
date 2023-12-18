@@ -7,17 +7,6 @@ from Task.models import Task
 from django.shortcuts import render
 from django.shortcuts import redirect
 
-def email(request):
-    if request.method == 'POST':
-        send_reminder_emails()
-        return redirect('home')
-    else:
-        return render(request,'reminder.html')
-
-
-
-
-
 @shared_task
 def send_reminder_emails():
     tasks_to_remind = Task.objects.filter(
