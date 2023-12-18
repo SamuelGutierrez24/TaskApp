@@ -4,14 +4,25 @@ from django import forms
 import Task.models as models
 from django.db import models as djangoModels
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.db.models import Q
+from django.db.models import Value
+from django.db.models import CharField
+from django.db.models import F
+from django.db.models.functions import Concat
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User 
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import User  # Importa el modelo de usuario de Django
 
 
+
+
+    
 class nameModelChoiceField(forms.ModelChoiceField):
-        def label_from_instance(self, obj: Model) -> str:
-            return obj.name
-        
+    def label_from_instance(self, obj: Model) -> str:
+        return obj.name
+    
         
         
 
@@ -67,10 +78,11 @@ class categoryCreationForm(ModelForm):
 class extraDataForm(forms.Form):
     name = forms.CharField(label="Nombre", required=False)
     description = forms.CharField(label="Descripcion", widget=forms.Textarea(), required=False)
+    archive = forms.FileField(label= 'Archivo a adjuntar',required=False)
 
 
 class CustomUserCreationForm(UserCreationForm):
-    # Puedes agregar campos adicionales aquí según tus necesidades
+
     first_name = forms.CharField(max_length=30, required=True)
     last_name = forms.CharField(max_length=30, required=True)
     email = forms.EmailField(max_length=254, required=True, help_text='Requerido. Ingrese una dirección de correo electrónico válida.')
