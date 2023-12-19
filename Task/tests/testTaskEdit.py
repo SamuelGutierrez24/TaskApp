@@ -13,18 +13,18 @@ class testTaskEdit(TestCase):
         models.Task(taskName='task',taskDescription='desc',category=models.Category.objects.get(id=1),color='#000000',user=user,taskState=0,periodicity=0,dueDate='2023-12-12',dueTime='12:12').save()
         
     def testRedirect(self):
-        response = self.client.get('/taskDetails/1/')
+        response = self.client.get('/editTask/1/')
         self.assertEquals(response.status_code,302)
     
     def testAccess(self):
         login = self.client.login(username='usuario', password='password')
-        response = self.client.get('/taskDetails/1/')
+        response = self.client.get('/editTask/1/')
         
         self.assertEquals(response.status_code,200)
     
     def testInvID(self):
         login = self.client.login(username='usuario', password='password')
-        response = self.client.get('/taskDetails/2/')
+        response = self.client.get('/editTask/2/')
         
         self.assertEquals(response.status_code,404)
     
