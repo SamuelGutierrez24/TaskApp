@@ -19,7 +19,7 @@ def home(request):
         user = request.user
         tasks = Task.objects.filter(user = request.user)
         opposite = request.session.get('opposite','Dark mode')
-        notis = Task.objects.filter(
+        notis = Task.objects.filter(user_id=user,
         dueDate__range=[
             timezone.now(),
             timezone.now() + timezone.timedelta(days=3)
