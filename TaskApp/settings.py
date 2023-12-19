@@ -146,3 +146,7 @@ EMAIL_USE_TLS = True
 STATICFILES_DIRS = (
   ('Task', os.path.join(BASE_DIR, 'Task', 'static')),
 )
+
+if DEBUG:
+    import mimetypes
+    mimetypes.add_type("application/javascript", ".js", True)
