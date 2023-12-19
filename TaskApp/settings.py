@@ -133,3 +133,10 @@ LOGIN_URL = '/signin'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'Task.User'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'filantropiaicesi@gmail.com'
+EMAIL_HOST_PASSWORD = 'kaxz umrt odcn hmsf'
+EMAIL_USE_TLS = True
