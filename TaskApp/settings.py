@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-)doizr2_1)^%@s9ig3k_ubjdq18m8)v+n2=gpz1t1dh-!i1zys
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['taskapp.azurewebsites.net', 'http://127.0.0.1:8000/']
+ALLOWED_HOSTS = ['taskapp.azurewebsites.net', '127.0.0.1']
 
 
 # Application definition
@@ -119,8 +119,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = str(BASE_DIR).replace('\\', '/') + 'TaskApp/static/'
-STATIC_ROOT = str(BASE_DIR).replace('\\', '/') + '/TaskApp/static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'TaskApp/static'),  # Reemplaza 'app_name' con el nombre de tu aplicación
+]
+
 
 MEDIA_URL = '/TaskApp/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
