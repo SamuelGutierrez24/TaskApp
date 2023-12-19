@@ -1,9 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from Task.forms import categoryCreationForm
-
 from django.contrib.auth.decorators import user_passes_test, login_required
-
 
 @login_required
 def createCategory(request):   
