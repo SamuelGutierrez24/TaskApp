@@ -58,7 +58,7 @@ ROOT_URLCONF = 'TaskApp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [[os.path.join(BASE_DIR, 'templates')]],
+        'DIRS': [os.path.join(BASE_DIR, 'Task/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,7 +121,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'TaskApp/static'),  # Reemplaza 'app_name' con el nombre de tu aplicación
+    os.path.join(BASE_DIR, 'Task/static'),  # Reemplaza 'app_name' con el nombre de tu aplicación
 ]
 
 
