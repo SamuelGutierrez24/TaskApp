@@ -38,5 +38,6 @@ def saveToDB(request):
     
     form = categoryCreationForm(request.POST)
     category = form.save(commit=False)
+    print(category)
     category.save()
     return redirect('home')
