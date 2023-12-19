@@ -149,4 +149,4 @@ STATICFILES_DIRS = (
 
 if DEBUG:
     import mimetypes
-    mimetypes.add_type("TaskApp/js", ".js", True)
+    mimetypes.add_type("application/javascript", ".js", True)
