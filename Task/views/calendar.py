@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from Task.models import Task
-
+from django.contrib.auth.decorators import user_passes_test, login_required
+@login_required
 def calendar(request):  
     if(request.method == 'GET'):
         opposite = request.session.get('opposite','Dark mode')

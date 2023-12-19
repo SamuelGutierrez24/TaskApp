@@ -3,7 +3,10 @@ from django.shortcuts import redirect
 from Task.forms import taskCreationForm
 from Task.forms import extraDataForm
 from Task.models import ExtraData
+from django.contrib.auth.decorators import user_passes_test, login_required
 
+
+@login_required
 def createTasks(request):   
     if request.method == 'GET':
         
