@@ -24,14 +24,14 @@ def signin(request):
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
         if user is not None:
             login(request,user)
-            send_reminder_emails()
+            send_reminder_emails(user)
             return redirect('home')
         else:
             messages.error(request, "Usuario y/o contrasena incorrecta")
             return render(request, 'login.html')
         
-def send_reminder_emails():
-    tasks_to_remind = Task.objects.filter(
+def send_reminder_emails(user_id):
+    tasks_to_remind = Task.objects.filter(user_id=user_id,
         dueDate__range=[
             timezone.now(),
             timezone.now() + timezone.timedelta(days=3)
@@ -46,5 +46,3 @@ def send_reminder_emails():
             [task.user.email],  
             fail_silently=False,
         )
-    
-    return tasks_to_remind
