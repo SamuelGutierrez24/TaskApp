@@ -27,6 +27,8 @@ import Task.views.signUp as signUp
 import Task.views.login as login
 import Task.views.home as home
 import Task.views.signOut as logOut
+from Task.views import descargarArchivo
+
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -43,6 +45,7 @@ urlpatterns = [
     path('taskDetails/<int:tID>/', taskDetails.taskDetails, name = 'taskDetails'),
     path('editTask/<int:task_id>/', editTask.editTask, name='editTask'),
     path('deleteTask/<int:task_id>/', deleteTask.deleteTask, name='delete_task'),
+    path('download/', descargarArchivo.DescargarArchivoView.as_view(), name='descargar_archivo'),
 
 
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

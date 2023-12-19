@@ -57,7 +57,7 @@ class Task(models.Model):
 class ExtraData(models.Model):
     nameExtra = models.CharField(max_length=100, blank=False)
     contentExtra = models.TextField()
-    archive = models.ImageField(upload_to='files/', null=True, blank=True)
+    archive = models.FileField(upload_to='files/', null=True, blank=True)
     task = models.ForeignKey(Task, on_delete=models.CASCADE, default=1)
         
     

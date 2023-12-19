@@ -50,6 +50,7 @@
 
             <h3>Periodicidad</h4>
                 {{ task.periodicity | nToPeriodicity }}
+
             {% if isExtra %}
                 <h3>Datos Extra</h3>
                     {% for n in extra %}
@@ -57,8 +58,17 @@
                             {{n.nameExtra}}
                         <h4>Descripcion</h4>
                             {{n.contentExtra}}
+                        {% if n.archive %} <!-- Si hay un archivo adjunto -->
+                            <form method="POST" action="{% url 'descargar_archivo' %}"> <!-- Enviar a la vista 'descargar_archivo' -->
+                                {% csrf_token %}
+                                <input type="hidden" name="id_tarea" value="{{task.id}}"/> <!-- Enviar el id de la tarea -->
+                                <input type="hidden" name="nombre_archivo" value="{{n.archive}}"/> <!-- Enviar el nombre del archivo -->
+                                <input type="submit" class="btn btn-primary" type="button" value="Descargar Archivo Adjunto"> <!-- Botón para descargar -->
+                            </form>
+                        {% endif %}
                     {% endfor %}
             {% endif %}
+            
             
             
         {% endblock %}
