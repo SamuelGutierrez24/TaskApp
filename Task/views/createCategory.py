@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from Task.forms import categoryCreationForm
-
 from django.contrib.auth.decorators import user_passes_test, login_required
 
 
@@ -40,6 +39,5 @@ def saveToDB(request):
     
     form = categoryCreationForm(request.POST)
     category = form.save(commit=False)
-    category.user = request.user  # Asigna el usuario actual a la tarea
     category.save()
     return redirect('home')
