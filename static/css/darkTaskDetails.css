@@ -1,0 +1,53 @@
+@import url('darkHome.css');
+
+
+
+#titleCard{
+    height: 75px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    
+}
+
+#title{
+    background-color: azure;
+    width: 300px;
+    border-radius: 4px;
+    height: 75px;
+    display: flex;
+    flex-flow: column;
+    text-align: center;
+    align-items: center;
+    overflow: hidden;
+}
+th, td {
+    border:0px;
+    padding: 0px;
+    text-align: center;
+}
+
+th {
+    background-color:inherit;
+}
+
+#button {
+    background-color: #4caf50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+#button:hover {
+    background-color: #45a049;
+}
+
+h1{
+    color:black;
+}

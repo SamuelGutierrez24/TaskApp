@@ -27,6 +27,8 @@ import Task.views.signUp as signUp
 import Task.views.login as login
 import Task.views.home as home
 import Task.views.signOut as logOut
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -43,4 +45,4 @@ urlpatterns = [
     path('deleteTask/<int:task_id>/', deleteTask.deleteTask, name='delete_task'),
 
 
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

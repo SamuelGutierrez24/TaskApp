@@ -68,11 +68,7 @@ class categoryCreationForm(ModelForm):
         fields = [
             'name',
             'description',
-            'user'
         ]
-        widgets = {
-            'user': forms.HiddenInput(),  # Este campo se llenará automáticamente con el usuario logueado
-        }
 
 
 class extraDataForm(forms.Form):

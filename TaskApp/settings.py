@@ -16,7 +16,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -28,6 +28,8 @@ SECRET_KEY = 'django-insecure-)doizr2_1)^%@s9ig3k_ubjdq18m8)v+n2=gpz1t1dh-!i1zys
 DEBUG = True
 
 ALLOWED_HOSTS = ['taskapp.azurewebsites.net', '127.0.0.1']
+
+CSRF_TRUSTED_ORIGINS = ['https://taskapp.azurewebsites.net']
 
 
 # Application definition
@@ -119,9 +121,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'Task/static')]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_URL = '/static/'
 
 MEDIA_URL = '/TaskApp/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -140,3 +142,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'filantropiaicesi@gmail.com'
 EMAIL_HOST_PASSWORD = 'kaxz umrt odcn hmsf'
 EMAIL_USE_TLS = True
+
+STATICFILES_DIRS = (
+  ('Task', os.path.join(BASE_DIR, 'Task', 'static')),
+)

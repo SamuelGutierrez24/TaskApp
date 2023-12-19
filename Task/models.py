@@ -15,7 +15,6 @@ class User(AbstractUser):
         return self.username
 
 class Category(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE,default=1)
     name = models.CharField(max_length=100, blank=False)
     description = models.TextField()
     

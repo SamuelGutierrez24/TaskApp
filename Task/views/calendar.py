@@ -12,14 +12,22 @@ def calendar(request):
             'opposite': opposite
         })
     else:
-        newMode = request.session.get('opposite','Dark mode')
-        if(newMode == 'Dark mode'):
-            request.session['opposite'] = 'Light mode'
-        else:
-            request.session['opposite'] = 'Dark mode'
-        opposite = request.session.get('opposite','Dark mode')
-        return render(request, './calendar.html', {
-            'tasksList':Task.objects.filter(user = request.user),
-            'tazk': Task.objects.first(),
-            'opposite': opposite
-        })
+        return manageDarkMode(request)
+
+
+def manageDarkMode(request):
+    newMode = request.session.get('opposite','Dark mode')
+    
+    if(newMode == 'Dark mode'):
+        request.session['opposite'] = 'Light mode'
+        
+    else:
+        request.session['opposite'] = 'Dark mode'
+        
+    opposite = request.session.get('opposite','Dark mode')
+    
+    return render(request, './calendar.html', {
+        'tasksList':Task.objects.filter(user = request.user),
+        'tazk': Task.objects.first(),
+        'opposite': opposite
+    })
