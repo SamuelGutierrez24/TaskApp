@@ -1,25 +1,25 @@
 from django.test import TestCase
-import Task.templatetags.nToPeriodicity as nToPeriodicity
+import Task.templatetags.nToPeriodicity as nt
 
 class testNToPeriodicity(TestCase):
 
     def testCase0(self):
         n = 0
-        assert nToPeriodicity(n) == 'No periodico'
+        assert nt.nToPeriodicity(n) == 'No periodico'
 
     def testCase1(self):
         n = 1
-        assert nToPeriodicity(n) == 'Diario'  
+        assert nt.nToPeriodicity(n) == 'Diario'  
           
     def testCase2(self):
         n = 2
-        assert nToPeriodicity(n) == 'Semanal'  
+        assert nt.nToPeriodicity(n) == 'Semanal'  
           
     def testCase3(self):
         n = 3
-        assert nToPeriodicity(n) == 'Mensual'   
+        assert nt.nToPeriodicity(n) == 'Mensual'   
          
     def testCase4(self):
         n = 4
-        assert nToPeriodicity(n) == 'Anual'            
+        assert nt.nToPeriodicity(n) == 'Anual'            
         
