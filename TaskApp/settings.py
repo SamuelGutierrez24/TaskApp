@@ -121,7 +121,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'Task/static'),  # Reemplaza 'app_name' con el nombre de tu aplicación
+   BASE_DIR, 'Task/static'
 ]
 
 
